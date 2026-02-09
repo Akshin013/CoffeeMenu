@@ -138,10 +138,10 @@ export default function AdminPage() {
   async function sendToGoogleForm(data) {
     const formData = new FormData();
 
-    formData.append("entry.790927292", data.title);    // Title
-    formData.append("entry.539363541", data.price);    // Price
-    formData.append("entry.1573017104", data.category);// Category
-    formData.append("entry.1415161543", data.image);   // Image
+    formData.append("entry.790927292", data.title); // Title
+    formData.append("entry.539363541", data.price); // Price
+    formData.append("entry.1573017104", data.category); // Category
+    formData.append("entry.1415161543", data.image); // Image
 
     await fetch(
       "https://docs.google.com/forms/d/e/1FAIpQLSebtr8AesfOfoVJ1KzSGIvwJRzyx2Qp4lFkxPcoQ9JZ7zr-ig/formResponse",
@@ -149,7 +149,7 @@ export default function AdminPage() {
         method: "POST",
         mode: "no-cors",
         body: formData,
-      }
+      },
     );
   }
 
@@ -214,15 +214,36 @@ export default function AdminPage() {
           className="w-full p-3 rounded-xl bg-[#2a2a2a] focus:outline-none focus:ring-2 focus:ring-amber-500"
           required
         />
-
-        <input
-          type="text"
-          placeholder="Категория"
+        <select
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          className="w-full p-3 rounded-xl bg-[#2a2a2a] focus:outline-none focus:ring-2 focus:ring-amber-500"
+          className="w-full p-3 rounded-xl  text-white border border-[#2a2a2a] focus:outline-none focus:ring-2 focus:ring-amber-500"
           required
-        />
+        >
+          <option value="" disabled className="bg-[#121212] text-white">
+            Выберите категорию
+          </option>
+
+          <option value="Espresso" className="bg-[#121212] text-white">
+            Espresso
+          </option>
+
+          <option value="Milk Coffee" className="bg-[#121212] text-white">
+            Milk Coffee
+          </option>
+
+          <option value="Iced Coffee" className="bg-[#121212] text-white">
+            Iced Coffee
+          </option>
+
+          <option value="Alternative Brew" className="bg-[#121212] text-white">
+            Alternative Brew
+          </option>
+
+          <option value="Signature Coffee" className="bg-[#121212] text-white">
+            Signature Coffee
+          </option>
+        </select>
 
         <label className="flex items-center gap-2 cursor-pointer bg-[#2a2a2a] p-3 rounded-xl hover:bg-[#333] transition">
           <FiUpload />
