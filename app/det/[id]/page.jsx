@@ -12,7 +12,9 @@ export default function CoffeeDetail() {
 
   useEffect(() => {
     getMenu().then((data) => {
-      const formatted = data.map((item, index) => ({
+      console.log(data);
+      
+      const formatted = data.reverse().map((item, index) => ({
         id: index, // тот же id что и на главной
         title: item.Title || "",
         price: Number(item.Price) || 0,
@@ -28,6 +30,7 @@ export default function CoffeeDetail() {
       setLoading(false);
     });
   }, [id]);
+console.log(coffee);
 
   if (loading) {
     return (
