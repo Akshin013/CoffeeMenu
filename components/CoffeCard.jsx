@@ -27,7 +27,7 @@ export default function CoffeeCard({ coffee, onAdd }) {
       {/* Price + Cart */}
       <div className="flex items-center justify-between mt-3">
         <span className="text-white font-semibold">
-          ${coffee.price}
+          {coffee.price} ₼
         </span>
 
         <button
