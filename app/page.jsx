@@ -23,10 +23,12 @@ export default function Home() {
   // 🟢 Загружаем меню из Google Sheets
 useEffect(() => {
   getMenu().then((data) => {
+    console.log(data[2]);
+    
     const formatted = data.map((item, index) => ({
       id: index, // генерируем уникальный ID
       title: item.Title || "", // точное имя поля
-      price: Number(item[" Price "]?.trim()) || 0, // убираем пробелы и приводим к числу
+      price: item.Price || "- ", // убираем пробелы и приводим к числу
       category: item.Category || "Other",
       image: item.Image || "", // если есть поле с картинкой
     }));

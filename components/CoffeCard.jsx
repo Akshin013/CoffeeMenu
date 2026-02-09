@@ -2,6 +2,7 @@ import Link from "next/link";
 import { FiShoppingBag } from "react-icons/fi";
 
 export default function CoffeeCard({ coffee, onAdd }) {
+  
   return (
     <Link href={`/det/${coffee.id}`} className="bg-[#424141] rounded-2xl p-3 flex flex-col">
       {/* Image */}

@@ -1,15 +1,41 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { menu } from "@/data/menu";
 import Link from "next/link";
+import { getMenu } from "@/data/getMenu";
 
 export default function CoffeeDetail() {
   const { id } = useParams();
+  const [coffee, setCoffee] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const coffee = menu.find(
-    (item) => item.id === Number(id)
-  );
+  useEffect(() => {
+    getMenu().then((data) => {
+      const formatted = data.map((item, index) => ({
+        id: index, // тот же id что и на главной
+        title: item.Title || "",
+        price: Number(item.Price) || 0,
+        category: item.Category || "Other",
+        image: item.Image || "",
+      }));
+
+      const found = formatted.find(
+        (item) => item.id === Number(id)
+      );
+
+      setCoffee(found);
+      setLoading(false);
+    });
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="p-6 text-center text-gray-400">
+        Загрузка...
+      </div>
+    );
+  }
 
   if (!coffee) {
     return (
@@ -23,7 +49,8 @@ export default function CoffeeDetail() {
   }
 
   return (
-    <div className="p-6 max-w-md mx-auto">
+    <div className="min-h-screen bg-[#121212] text-white p-6 max-w-md mx-auto">
+
       <img
         src={coffee.image}
         alt={coffee.title}
@@ -34,15 +61,15 @@ export default function CoffeeDetail() {
         {coffee.title}
       </h1>
 
-      <p className="text-sm text-gray-500 mb-2">
+      <p className="text-sm text-gray-400 mb-2">
         {coffee.category}
       </p>
 
-      <p className="text-xl font-semibold text-amber-700 mb-4">
+      <p className="text-xl font-semibold text-amber-500 mb-4">
         {coffee.price} ₼
       </p>
 
-      <button className="w-full bg-amber-700 text-white py-3 rounded-xl">
+      <button className="w-full bg-amber-700 text-white py-3 rounded-xl hover:bg-amber-600 transition">
         Добавить в корзину
       </button>
 
@@ -52,6 +79,7 @@ export default function CoffeeDetail() {
       >
         ← Назад
       </Link>
+
     </div>
   );
 }

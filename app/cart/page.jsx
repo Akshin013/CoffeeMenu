@@ -12,7 +12,7 @@ export default function Cart() {
     if (saved) setCart(JSON.parse(saved));
   }, []);
 
-  const total = cart.reduce((sum, i) => sum + i.price, 0);
+  const total = cart.reduce((sum, i) => sum + Number(i.price), 0);
 
   function removeItem(index) {
     const updated = cart.filter((_, i) => i !== index);
@@ -27,9 +27,7 @@ export default function Cart() {
 
       {/* Empty */}
       {cart.length === 0 && (
-        <p className="text-gray-400 text-center mt-10">
-          Корзина пуста ☕
-        </p>
+        <p className="text-gray-400 text-center mt-10">Корзина пуста ☕</p>
       )}
 
       {/* Items */}
@@ -48,19 +46,13 @@ export default function Cart() {
 
             {/* Info */}
             <div className="flex-1">
-              <h3 className="text-sm font-semibold">
-                {item.title}
-              </h3>
-              <p className="text-xs text-gray-400">
-                {item.category}
-              </p>
+              <h3 className="text-sm font-semibold">{item.title}</h3>
+              <p className="text-xs text-gray-400">{item.category}</p>
             </div>
 
             {/* Price */}
             <div className="text-right">
-              <p className="font-semibold">
-                ${item.price}
-              </p>
+              <p className="font-semibold">${item.price}</p>
               <button
                 onClick={() => removeItem(index)}
                 className="text-red-400 mt-1"
@@ -77,9 +69,7 @@ export default function Cart() {
         <div className="fixed mb-18 bottom-0 left-0 right-0 bg-[#141414] border-t border-zinc-800 p-4">
           <div className="flex justify-between items-center mb-3">
             <span className="text-gray-400">Итого</span>
-            <span className="text-lg font-semibold">
-              ${total.toFixed(2)}
-            </span>
+            <span className="text-lg font-semibold">${total.toFixed(2)}</span>
           </div>
 
           <Link
