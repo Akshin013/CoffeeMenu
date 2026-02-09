@@ -31,21 +31,10 @@ useEffect(() => {
         price: Number(item.Price) || 0,
         category: item.Category?.trim() || "Other",
         image: item.Image || "",
-      }));
-
-    console.log(data[2]);
-    
-    const formatted = data.map((item, index) => ({
-      id: index, // генерируем уникальный ID
-      title: item.Title || "", // точное имя поля
-      price: item.Price || "- ", // убираем пробелы и приводим к числу
-      category: item.Category || "Other",
-      image: item.Image || "", // если есть поле с картинкой
-    }));
+      }));    
     setMenu(formatted);
   });
 }, []);
-console.log(menu);
 
   // 🟢 Загружаем корзину
   useEffect(() => {
