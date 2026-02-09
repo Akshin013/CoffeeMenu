@@ -23,6 +23,16 @@ export default function Home() {
   // 🟢 Загружаем меню из Google Sheets
 useEffect(() => {
   getMenu().then((data) => {
+    const formatted = data
+      .reverse() // 🔥 НОВЫЕ ТОВАРЫ БУДУТ СВЕРХУ
+      .map((item, index) => ({
+        id: index,
+        title: item.Title?.trim() || "",
+        price: Number(item.Price) || 0,
+        category: item.Category?.trim() || "Other",
+        image: item.Image || "",
+      }));
+
     console.log(data[2]);
     
     const formatted = data.map((item, index) => ({
@@ -35,7 +45,6 @@ useEffect(() => {
     setMenu(formatted);
   });
 }, []);
-
 console.log(menu);
 
   // 🟢 Загружаем корзину
