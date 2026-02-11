@@ -60,7 +60,7 @@ export default function Home() {
       <div className="sticky top-0 z-50 backdrop-blur-sm bg-[#121212]/70 pt-4 pb-2 border-b border-[#2a2a2a]">
         {/* Header */}
         <div className="flex justify-between items-center py-2">
-          <h1 className="text-xl font-bold tracking-wide p-2 border border-amber-400 rounded-lg">☕ Sizin Logo</h1>
+          <h1 className="text-xl font-bold tracking-wide p-2 border border-amber-400 rounded-lg">☕ Logo</h1>
 
           <Link
             href="/cart"
